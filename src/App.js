@@ -11,19 +11,13 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser)=>{
       console.log("Auth state changed:", authUser); // Debug log
       if(authUser){
-        // Clear basket when new user logs in
-        dispatch({
-          type: Type.EMPTY_BASKET
-        });
+        // When user signs in, load their cart
         dispatch({
           type:Type.SET_USER,
           user:authUser
         })
       }else{
-        // Clear basket when user logs out
-        dispatch({
-          type: Type.EMPTY_BASKET
-        });
+        // When user signs out, clear the cart from state but keep it in localStorage
         dispatch({
           type:Type.SET_USER,
           user:null
