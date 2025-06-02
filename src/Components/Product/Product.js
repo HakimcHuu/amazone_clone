@@ -23,6 +23,7 @@ function Product() {
 return (
     <> 
     {
+        // If isLoading is true, show Loader component , // otherwise show the products
         isLoading?(<Loader/>):( <section className={classes.Product_container}>
             {
             Products?.map((singleProduct)=>{

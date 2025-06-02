@@ -4,34 +4,33 @@ import {DataContext} from "./Components/DataProvider/DataProvider.jsx"
 import { Type } from './Utility/action.type';
 import {auth} from './Utility/firebase'
 
-
 function App() {
   const [{user},dispatch]=useContext(DataContext) 
 
   useEffect(()=>{
-    auth.onAuthStateChanged((authUser)=>{
+    const unsubscribe = auth.onAuthStateChanged((authUser)=>{
       if(authUser){
-        // console.log(authUser);
         dispatch({
           type:Type.SET_USER,
           user:authUser
         })
       }else{
-        // console.log('No user is signed in');
         dispatch({
           type:Type.SET_USER,
           user:null
         })
       }
-    })
+    }, (error) => {
+      console.error("Auth state change error:", error);
+      dispatch({
+        type:Type.SET_USER,
+        user:null
+      })
+    });
 
-
+    // Cleanup subscription on unmount
+    // return () => unsubscribe();
   },[])
-
-
-
-
-
 
   return (
     <div>

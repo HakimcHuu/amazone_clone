@@ -5,6 +5,7 @@ return (
     <div>
         {/* for use of our header in different places */}
         <Header/>
+        {/* from landing pages */}
         {children}
 
     </div>

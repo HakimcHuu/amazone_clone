@@ -7,18 +7,23 @@ import classes from './Carousel.module.css'; // CSS module for styling
 function CarouselEffect() {
   return (
     <div>
-      <Carousel 
-        autoPlay={true} 
-        infiniteLoop={true} 
-        showThumbs={false} 
-        showIndicators={false} 
-        interval={3000} 
+      <Carousel
+        autoPlay={true}
+        infiniteLoop={true}
+        showThumbs={false}
+        showIndicators={false}
+        interval={3000}
         transitionTime={500}
       >
         {images.map((imageitemLink, index) => (
-          <img src={imageitemLink} alt={`carousel-slide-${index}`} key={index} />
+          <img
+            src={imageitemLink}
+            alt={`carousel-slide-${index}`}
+            key={index}
+          />
         ))}
       </Carousel>
+      {/* fade part */}
       <div className={classes.hero_img}></div>
     </div>
   );

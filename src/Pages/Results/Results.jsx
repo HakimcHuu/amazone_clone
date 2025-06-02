@@ -11,16 +11,18 @@ function Results() {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null); // Handle API errors
-  const { CatagoryName } = useParams(); // Correct spelling for consistency
+  const { CategoryName } = useParams();
+  // console.log('CategoryName:', CategoryName); // Log the category name for debugging
 
   useEffect(() => {
     setIsLoading(true); // Start loader
     setError(null); // Reset error state
 
     axios
-      .get(`${productUrl}/products/category/${CatagoryName}`)
+      .get(`${productUrl}/products/category/${CategoryName}`)
       .then((res) => {
         setResults(Array.isArray(res.data) ? res.data : []); // Ensure results is always an array
+        // console.log('API Response:', res.data); // Log the API response for debugging
         setIsLoading(false);
       })
       .catch((err) => {
@@ -28,13 +30,13 @@ function Results() {
         setError('Failed to fetch products. Please try again later.');
         setIsLoading(false);
       });
-  }, [CatagoryName]); // Add CategoryName as a dependency
+  }, [CategoryName]); // Add CategoryName as a dependency
 
   return (
     <LayOut>
       <section>
         <h1 style={{ padding: '30px' }}>Results</h1>
-        <p style={{ padding: '30px' }}>Category / {CatagoryName}</p>
+        <p style={{ padding: '30px' }}>Category / {CategoryName}</p>
         <hr />
         {isLoading ? (
           <Loader />
@@ -42,7 +44,7 @@ function Results() {
           <div className={classes.error}>{error}</div> // Display error message
         ) : results.length > 0 ? (
           <div className={classes.products_container}>
-            {results.map((product) => (
+            {results?.map((product) => (
               <ProductCard
                 key={product.id}
                 Product={product} // Capital "P" for ProductCard prop

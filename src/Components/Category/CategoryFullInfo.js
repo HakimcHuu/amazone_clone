@@ -1,4 +1,4 @@
-export const CatagoryInfo = [
+export const CategoryInfo = [
 {   "title": "Discover fashion trends",
     "name": "women's clothing",
     "imageLink":"https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",

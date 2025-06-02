@@ -12,7 +12,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 const stripePromise = loadStripe(
   "pk_test_51QPmhsP6R5yf02q7HWxHse1ynv8gwH6knRNYxRsHMKPjx8l0ihLguK8wWnG6ZlfQALV1yaPNiEY6mrc1EIkNqA9Q00M6b21Snk"
-);
+);//public key
 function Routing() {
 
   return (
@@ -39,7 +39,7 @@ function Routing() {
           </ProtectedRoute>
         } />
         
-        <Route path="/category/:CatagoryName" element={<Results />} />
+        <Route path="/category/:CategoryName" element={<Results />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="/Cart" element={<Cart />} />
       </Routes>

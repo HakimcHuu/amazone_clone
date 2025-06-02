@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import classes from './ProductDetail.module.css';
-import LayOut from '../../Components/LayOut/LayOut';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { productUrl } from '../../Api/endPoints';
-import ProductCard from '../../Components/Product/ProductCard';
-import Loader from '../../Components/Loader/Loader';
+import React, { useEffect, useState } from "react";
+import classes from "./ProductDetail.module.css";
+import LayOut from "../../Components/LayOut/LayOut";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { productUrl } from "../../Api/endPoints";
+import ProductCard from "../../Components/Product/ProductCard";
+import Loader from "../../Components/Loader/Loader";
 
 function ProductDetail() {
   const { productId } = useParams(); // Get productId from the URL
@@ -25,23 +25,24 @@ function ProductDetail() {
       })
       .catch((err) => {
         console.error(err);
-        setError('Failed to load product details. Please try again later.');
+        setError("Failed to load product details. Please try again later.");
         setIsLoading(false);
       });
   }, [productId]); // Include productId in the dependency array
 
   return (
-    <LayOut> 
+    <LayOut>
+      {/* if isLoading is true, show Loader component */}
       {isLoading ? (
         <Loader />
       ) : error ? (
         <div className={classes.error}>{error}</div> // Display error if fetching fails
       ) : (
-        <ProductCard 
-          Product={product} 
-          flex={true} 
-          renderDesc={true} 
-          renderAdd={true} 
+        <ProductCard
+          Product={product}
+          flex={true}
+          renderDesc={true}
+          renderAdd={true}
         />
       )}
     </LayOut>

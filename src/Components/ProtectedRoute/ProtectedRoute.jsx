@@ -1,23 +1,23 @@
-import React, {useContext,useEffect} from 'react'
-import {useNavigate} from "react-router-dom"
-import {DataContext} from "../DataProvider/DataProvider"
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { DataContext } from "../DataProvider/DataProvider";
 
-function ProtectedRoute({children,msg,redirect}) {
+function ProtectedRoute({ children, msg, redirect }) {
+  const navigate = useNavigate();
+  const [{ user }, dispatch] = useContext(DataContext);
 
-    const navigate = useNavigate()
-    const [{user},dispatch]=useContext(DataContext)
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth", {
+        state: {
+          msg,
+          redirect,
+        },
+      });
+    }
+  }, [user, msg, redirect, navigate]);
 
+  return user ? children : null;
+}
 
-
-
-    useEffect(()=>{
-        if(!user){
-            navigate("/auth",{state:{msg,redirect}})
-        }
-
-    },[user]);
-
-return children
-};
-
-export default ProtectedRoute
+export default ProtectedRoute;

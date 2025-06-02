@@ -1,16 +1,26 @@
-.container{
-    background-color: #efeeee;
+.container {
+    background-color: #f8f9fa;
     padding: 30px;
-}
-.Orders__container{
-    background-color: #fff;
-    padding: 20px;
+    min-height: calc(100vh - 60px);
 }
 
-.Orders__container h2{
+.Orders__container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.Orders__container h2 {
     border-bottom: 2px solid var(--primary-shade);
     padding: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
 }
+
 .Orders__container p{
     padding: 12px;
 }
@@ -20,5 +30,101 @@
 }
 .Orders__container div{
     height: auto !important;
+}
+
+.success_message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error_message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.no_orders {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 18px;
+}
+
+.orders_list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.order_item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.order_item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order_header {
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.order_header p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.order_products {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order_products img {
+    width: 100px !important;
+    height: 100px;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .Orders__container {
+        padding: 20px;
+    }
+
+    .Orders__container h2 {
+        font-size: 20px;
+        padding: 15px;
+    }
+
+    .order_header {
+        padding: 10px 15px;
+    }
+
+    .order_products {
+        padding: 15px;
+    }
 }
 
