@@ -7,7 +7,9 @@ function ProtectedRoute({ children, msg, redirect }) {
   const [{ user }, dispatch] = useContext(DataContext);
 
   useEffect(() => {
+    console.log("ProtectedRoute - Current user:", user); // Debug log
     if (!user) {
+      console.log("ProtectedRoute - No user, redirecting to auth"); // Debug log
       navigate("/auth", {
         state: {
           msg,

@@ -50,19 +50,28 @@ function Auth() {
     if (e.target.name === "signin") {
       setLoading({ ...loading, signIn: true });
       try {
+        console.log("Attempting to sign in with:", { email }); // Debug log
         const userInfo = await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
+        console.log("Sign in successful:", userInfo); // Debug log
+        
         dispatch({
           type: Type.SET_USER,
           user: userInfo.user,
         });
-        navigate(navStateData?.state?.redirect || "/");
+
+        // Navigate after state is updated
+        navigate(navStateData?.state?.redirect || "/", { replace: true });
       } catch (error) {
+        console.error("Sign in error:", error.code, error.message); // Debug log
         let errorMessage = "An error occurred during sign in";
         switch (error.code) {
+          case "auth/invalid-credential":
+            errorMessage = "Invalid email or password";
+            break;
           case "auth/invalid-email":
             errorMessage = "Invalid email address";
             break;
@@ -72,6 +81,9 @@ function Auth() {
           case "auth/wrong-password":
             errorMessage = "Incorrect password";
             break;
+          case "auth/email-already-in-use":
+            errorMessage = "Please sign in instead";
+            break;
           default:
             errorMessage = error.message;
         }
@@ -79,24 +91,33 @@ function Auth() {
       } finally {
         setLoading({ ...loading, signIn: false });
       }
-    } else {
+    } else if (e.target.name === "signup") {
       setLoading({ ...loading, signUp: true });
       try {
+        console.log("Attempting to sign up with:", { email }); // Debug log
         const userInfo = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
+        console.log("Sign up successful:", userInfo); // Debug log
+        
         dispatch({
           type: Type.SET_USER,
           user: userInfo.user,
         });
-        navigate(navStateData?.state?.redirect || "/");
+
+        // Navigate after state is updated
+        navigate(navStateData?.state?.redirect || "/", { replace: true });
       } catch (error) {
+        console.error("Sign up error:", error.code, error.message); // Debug log
         let errorMessage = "An error occurred during sign up";
         switch (error.code) {
+          case "auth/invalid-credential":
+            errorMessage = "Invalid email or password";
+            break;
           case "auth/email-already-in-use":
-            errorMessage = "An account already exists with this email";
+            errorMessage = "An account already exists with this email. Please sign in instead.";
             break;
           case "auth/invalid-email":
             errorMessage = "Invalid email address";
@@ -166,7 +187,8 @@ function Auth() {
           </div>
 
           <button
-            type="submit"
+            type="button"
+            onClick={authHandler}
             name="signin"
             className={classes.login_signInbutton}
           >

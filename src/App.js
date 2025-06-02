@@ -9,6 +9,7 @@ function App() {
 
   useEffect(()=>{
     const unsubscribe = auth.onAuthStateChanged((authUser)=>{
+      console.log("Auth state changed:", authUser); // Debug log
       if(authUser){
         dispatch({
           type:Type.SET_USER,
@@ -20,17 +21,16 @@ function App() {
           user:null
         })
       }
-    }, (error) => {
-      console.error("Auth state change error:", error);
-      dispatch({
-        type:Type.SET_USER,
-        user:null
-      })
     });
 
     // Cleanup subscription on unmount
-    // return () => unsubscribe();
-  },[])
+    return () => unsubscribe();
+  },[dispatch])
+
+  // Debug log for user state
+  useEffect(() => {
+    console.log("Current user state:", user);
+  }, [user]);
 
   return (
     <div>
