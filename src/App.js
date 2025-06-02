@@ -11,11 +11,19 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser)=>{
       console.log("Auth state changed:", authUser); // Debug log
       if(authUser){
+        // Clear basket when new user logs in
+        dispatch({
+          type: Type.EMPTY_BASKET
+        });
         dispatch({
           type:Type.SET_USER,
           user:authUser
         })
       }else{
+        // Clear basket when user logs out
+        dispatch({
+          type: Type.EMPTY_BASKET
+        });
         dispatch({
           type:Type.SET_USER,
           user:null
