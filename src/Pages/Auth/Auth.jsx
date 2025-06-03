@@ -31,6 +31,18 @@ function Auth() {
     return emailRegex.test(email);
   };
 
+//   For test.email@domain123.org:
+
+// test.email → [^\s@]+ (username part)
+
+// @ → matches the @
+
+// domain123 → [^\s@]+ (domain)
+
+// . → matches the .
+
+// org → [^\s@]+ (top-level domain)
+
   const authHandler = async (e) => {
     e.preventDefault();
     setError("");

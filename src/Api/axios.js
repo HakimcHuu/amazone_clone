@@ -3,7 +3,6 @@ const axiosInstance = axios.create({
   //localhost
   // baseURL: "http://localhost:5001",
   // deployed version of amazon server on render.com
-  // baseURL: "https://amazon-api-deploy-1-s1uj.onrender.com",
   baseURL: "https://amazon-api-deploy-ydiy.onrender.com/",
 });
 export { axiosInstance};
@@ -13,7 +12,7 @@ export { axiosInstance};
 
 
 
-
+//firbase changed code for security rules
 
 // rules_version = '2';
 // service cloud.firestore {

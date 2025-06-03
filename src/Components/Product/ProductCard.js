@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import Rating from "@mui/material/Rating";
 import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 import classes from "./Product.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Type } from "../../Utility/action.type";
 import { DataContext } from "../DataProvider/DataProvider";
 
 function ProductCard({ Product, flex, renderDesc, renderAdd }) {
   const [state, dispatch] = useContext(DataContext);
+  const location = useLocation();
+  const isCategoryPage = location.pathname.startsWith('/category/');
 
   if (!Product) {
     return null; // Return null if Product is undefined
@@ -49,8 +51,7 @@ function ProductCard({ Product, flex, renderDesc, renderAdd }) {
 
       <div>
         <h3>{title}</h3>
-        {/* {renderDesc && <div style={{maxwidth:"200px"}}>{description}</div>} */}
-        {renderDesc && <div className={classes.img}>{description}</div>}
+        {renderDesc && !isCategoryPage && <div className={classes.img}>{description}</div>}
 
         <div className={classes.rating}>
           {/* Rating */}
